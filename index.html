@@ -1,126 +1,199 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#09090f">
-  <meta name="description" content="My Chess Journey — a personal training dashboard">
-  <link rel="manifest" href="/manifest.webmanifest">
-  <link rel="icon" href="/icons/icon-192.png">
-  <title>My Chess Journey</title>
-  <style>
-    :root{color-scheme:dark;--bg:#09090f;--panel:#141420;--panel2:#1b1a2a;--line:#302d43;--text:#f4f1fa;--muted:#aaa5ba;--purple:#a78bfa;--pink:#d8b4fe;--green:#86efac}
-    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#211638 0,#09090f 48%);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,sans-serif}
-    header{padding:26px 18px 18px;max-width:1100px;margin:auto}h1{font-size:clamp(26px,5vw,38px);margin:0 0 5px;letter-spacing:-1px}h1 span{color:var(--purple)}.sub{color:var(--muted)}
-    main{max-width:1100px;margin:auto;padding:0 16px 50px;display:grid;gap:14px;grid-template-columns:repeat(12,minmax(0,1fr))}
-    .card{background:linear-gradient(145deg,#191827,#11111a);border:1px solid var(--line);border-radius:18px;padding:17px;min-width:0}
-    .wide{grid-column:span 12}.half{grid-column:span 6}.third{grid-column:span 4}
-    h2{font-size:17px;margin:0 0 13px}h3{font-size:14px;margin:0 0 8px;color:var(--muted)}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{background:var(--panel2);padding:13px;border-radius:13px}.num{font-size:26px;font-weight:750}.small{font-size:12px;color:var(--muted)}
-    .bar{height:9px;background:#302b40;border-radius:99px;overflow:hidden;margin:12px 0 6px}.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8b5cf6,#d8b4fe);border-radius:99px}
-    button,input,select,textarea{font:inherit;color:inherit}button{border:1px solid #5b4b7c;background:#33264e;border-radius:10px;padding:10px 13px;cursor:pointer}button.primary{background:#8b5cf6;color:#100b1c;border:0;font-weight:700}button.ghost{background:transparent;border-color:var(--line)}
-    input,select,textarea{width:100%;background:#0d0d15;border:1px solid var(--line);border-radius:10px;padding:10px;margin:5px 0 10px}textarea{min-height:72px;resize:vertical}
-    label{display:block;color:var(--muted);font-size:12px}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.task{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #292638}.task:last-child{border:0}.task input{width:auto;margin:0;accent-color:#a78bfa}
-    .muted{color:var(--muted)}.pill{display:inline-block;border:1px solid var(--line);padding:4px 9px;border-radius:99px;font-size:12px;color:var(--pink)}
-    #games{display:grid;gap:8px}.game{background:#11111a;border:1px solid var(--line);border-radius:11px;padding:10px}.game strong{display:block}
-    .board{display:grid;grid-template-columns:repeat(8,1fr);max-width:360px;aspect-ratio:1;margin:12px auto;border:2px solid var(--line)}.sq{display:grid;place-items:center;font-size:clamp(20px,6vw,34px);aspect-ratio:1;cursor:pointer;user-select:none}.light{background:#d7c8b7;color:#211b27}.dark{background:#6e587b;color:#fff}.selected{outline:3px solid #facc15;outline-offset:-3px}
-    footer{text-align:center;color:var(--muted);padding:24px;font-size:12px}
-    @media(max-width:700px){.half,.third{grid-column:span 12}.stats{grid-template-columns:repeat(3,1fr)}.num{font-size:22px}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0e1814">
+<meta name="description" content="My Chess Journey — your personal chess HQ.">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<title>My Chess Journey</title>
+<link rel="stylesheet" href="/css/app.css">
+<script>try{var s=JSON.parse(localStorage.getItem('mcj_redesign_v1')).settings;document.documentElement.dataset.theme=s.theme;document.documentElement.dataset.board=s.board;document.documentElement.dataset.pieces=s.pieces}catch(e){}</script>
 </head>
 <body>
-<header>
-  <div class="pill">YOUR PERSONAL CHESS HQ</div>
-  <h1>My Chess <span>Journey</span></h1>
-  <div class="sub">Road to 1500 · A calmer, smarter climb.</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="p" viewBox="0 0 45 45"><circle cx="22.5" cy="12" r="5"/><path d="M18 20h9c2 2 3.500 4.500 3.500 7.500 0 3-1.500 5-3.500 7.500H18c-2-2.500-3.500-4.500-3.500-7.500 0-3 1.500-5.500 3.500-7.500z"/><path d="M11 40v-3c0-1.500 2-2 4-2h15c2 0 4 .5 4 2v3z"/></symbol>
+<symbol id="r" viewBox="0 0 45 45"><path d="M11 40v-3c0-1 1-2 2-2h19c1 0 2 1 2 2v3z"/><path d="M14 35l1.500-15h14L31 35z"/><path d="M12 20v-9h4.500v3H20v-3h5v3h3.500v-3H33v9z"/></symbol>
+<symbol id="n" viewBox="0 0 45 45"><path d="M11 40v-3c0-1 1-2 2-2h20c1 0 2 1 2 2v3z"/><path d="M13 35c0-8 2.500-13 8-17-2.500 0-5 1-6.500 2.500l-3-1.500 4-7 2 1.500L19 9l3.500 3c8 1 14 7.500 14 16 0 3-.500 5.500-1 7.500z"/><circle cx="20.500" cy="15.500" r="1" style="fill:var(--ps)"/></symbol>
+<symbol id="b" viewBox="0 0 45 45"><circle cx="22.500" cy="8" r="2.500"/><path d="M22.500 11c-5 3.500-7 8-7 12 0 4 2 7 4 11.500h6c2-4.500 4-7.500 4-11.500 0-4-2-8.500-7-12z"/><path d="M13 40v-3c0-1.500 3-2.500 9.500-2.500S32 35.500 32 37v3z"/><path d="M20.500 17.500l4 4.500" fill="none"/></symbol>
+<symbol id="q" viewBox="0 0 45 45"><path d="M10 40v-3c0-1 1-2 2-2h21c1 0 2 1 2 2v3z"/><path d="M12 35L9.500 16.500l6.500 8 2.500-12 4 11.500 4-11.500 2.500 12 6.500-8L33 35z"/><circle cx="9.500" cy="14.500" r="2"/><circle cx="18.500" cy="10.500" r="2"/><circle cx="26.500" cy="10.500" r="2"/><circle cx="35.500" cy="14.500" r="2"/></symbol>
+<symbol id="k" viewBox="0 0 45 45"><path d="M21 4h3v3h3v3h-3v3h-3v-3h-3V7h3z"/><path d="M13 35c-2.500-6 0-12 5-15 1.500-1 3-1.500 4.500-1.500S25.500 19 27 20c5 3 7.500 9 5 15z"/><path d="M11 40v-3c0-1 1-2 2-2h19c1 0 2 1 2 2v3z"/></symbol>
+</defs></svg>
+
+<div class="app">
+<header class="top">
+ <div class="brand"><span class="logo">♞</span><div><small>THE HQ</small><b>My Chess Journey</b></div></div>
+ <div class="tr">
+  <button class="btn gold sm" data-act="install" data-install>⬇ Install App</button>
+  <button class="icon" data-act="theme" aria-label="Switch between dark and light theme">◐</button>
+ </div>
 </header>
+
 <main>
-  <section class="card wide">
-    <div class="row" style="justify-content:space-between">
-      <div><h2>Rapid rating tracker</h2><div class="small">Update your rating after a rated session.</div></div>
-      <span class="pill">TARGET · 31 DEC 2026</span>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="small">CURRENT RAPID</div><div class="num" id="rating">1204</div></div>
-      <div class="stat"><div class="small">TARGET</div><div class="num">1500</div></div>
-      <div class="stat"><div class="small">TO GO</div><div class="num" id="remaining">296</div></div>
-    </div>
-    <div class="bar"><i id="progress"></i></div><div class="small" id="progressText">0% of the climb completed</div>
-    <div class="row" style="margin-top:12px"><label>New rating<input id="newRating" type="number" min="0" placeholder="Enter current rapid rating"></label><button class="primary" id="saveRating" style="align-self:end">Update rating</button></div>
-  </section>
-  <section class="card half">
-    <h2>Today's training</h2>
-    <div class="small" style="margin-bottom:10px">Tick things off as you complete them.</div>
-    <div id="tasks"></div>
-    <button class="ghost" id="resetTasks" style="margin-top:12px">Reset checklist</button>
-  </section>
-  <section class="card half">
-    <h2>My training rules</h2>
-    <div class="task">♟️ <span>Five rated rapid games on rated days</span></div>
-    <div class="task">🧩 <span>20 puzzles on rated days; 40 on puzzle days</span></div>
-    <div class="task">🔍 <span>Review every rated game</span></div>
-    <div class="task">🛑 <span>Stop rated play after two consecutive losses</span></div>
-    <div class="task">🌙 <span>Casual games are for fun, not quota</span></div>
-  </section>
-  <section class="card half">
-    <h2>Game journal</h2>
-    <label>Opponent<input id="opponent" placeholder="Opponent username"></label>
-    <div class="row"><label>Result<select id="result"><option>Win</option><option>Draw</option><option>Loss</option></select></label><label>Rating after game<input id="gameRating" type="number" placeholder="e.g. 1210"></label></div>
-    <label>What did I learn?<textarea id="notes" placeholder="A blunder, good decision, recurring weakness..."></textarea></label>
-    <button class="primary" id="addGame">Save game</button>
-    <div id="games" style="margin-top:12px"></div>
-  </section>
-  <section class="card half">
-    <h2>Puzzle focus</h2>
-    <label>Weakness to work on<select id="weakness"><option>Hanging pieces</option><option>Forks</option><option>Pins and skewers</option><option>Back-rank tactics</option><option>Mate patterns</option><option>Calculation</option><option>Endgames</option><option>Opening principles</option></select></label>
-    <label>Puzzles completed today<input id="puzzleCount" type="number" min="0" value="0"></label>
-    <button class="primary" id="savePuzzle">Save puzzle session</button>
-    <p class="small" id="puzzleStatus">Your focus log will appear here.</p>
-  </section>
-  <section class="card half">
-    <h2>Lichess connection</h2>
-    <p class="small">For now, open your public Lichess profile and game archive. This first build does not request your password or private account access.</p>
-    <label>Lichess username<input id="lichessUser" value="Estella_Sama"></label>
-    <button id="openProfile">Open profile</button> <button class="ghost" id="openGames">Open games</button>
-  </section>
-  <section class="card half">
-    <h2>Backup & restore</h2>
-    <p class="small">Your entries are saved on this device. Export a backup before clearing browser data or changing phones.</p>
-    <button id="exportData">Export backup</button>
-    <label style="margin-top:12px">Restore a backup<input type="file" id="importFile" accept="application/json"></label>
-    <p class="small">Install this app from your browser menu using “Install app” or “Add to Home screen”.</p>
-  </section>
-  <section class="card wide">
-    <h2>Chessboard · local practice</h2>
-    <p class="small">A simple practice board is included. Full legal-move play, AI tutoring and online friend rooms are planned for later builds.</p>
-    <div class="board" id="board" aria-label="Chessboard"></div>
-    <div class="row"><button class="ghost" id="flipBoard">Flip board</button><button class="ghost" id="resetBoard">Reset board</button></div>
-    <p class="small" id="boardStatus">Practice position only — this board does not validate chess moves yet.</p>
-  </section>
+<!-- THE HQ -->
+<section class="page on" id="hq">
+ <h2 class="hi">Welcome back, Estella.</h2>
+ <p class="mut">The climb to 1500 · one move at a time.</p>
+ <div class="hqgrid">
+ <div>
+  <div class="hero">
+   <div class="row"><div><small>CURRENT RAPID</small><div class="big" id="rating">1204</div><span class="chip" id="gain"></span></div>
+   <div class="tgt"><small>TARGET · 31 DEC 2026</small><b>1500</b><span id="days"></span></div></div>
+   <div class="bar"><i id="bar"></i></div>
+   <div class="row mut2"><span id="pct"></span><span id="togo"></span></div>
+   <div class="row" style="margin-top:12px"><button class="btn ghost sm" data-act="editRating">Edit rating</button></div>
+   <form id="ratingForm" class="inl" hidden><input id="ratingIn" type="number" inputmode="numeric" min="0" max="3500" aria-label="New rapid rating" required><button class="btn sm">Save</button></form>
+  </div>
+  <div class="stats">
+   <div class="stat"><span>GAMES LOGGED</span><b id="sGames">0</b></div>
+   <div class="stat"><span>W · D · L</span><b id="sWdl">0·0·0</b></div>
+   <div class="stat"><span>STREAK</span><b id="sStreak">0</b></div>
+   <div class="stat"><span>PUZZLES TODAY</span><b id="sPuz">0</b></div>
+  </div>
+  <div class="card"><div class="sh"><h3>Daily training mission</h3></div><div class="mission"></div>
+   <button class="btn ghost sm" data-act="resetTasks">Reset checklist</button></div>
+  <div class="card"><h3>Training rules</h3><ul class="rules">
+   <li>♟️ Five rated rapid games on rated days</li><li>🧩 20 puzzles on rated days; 40 on puzzle days</li><li>🔍 Review every rated game</li><li>🛑 Stop rated play after two consecutive losses</li><li>🌙 Casual games are for fun, not quota</li></ul></div>
+ </div>
+ <div>
+  <div class="card"><div class="sh"><h3>Your board</h3><button class="lnk" data-act="go" data-p="board">Open →</button></div>
+   <div id="mini" class="bd mini" aria-hidden="true"></div></div>
+  <div class="quick">
+   <a class="q" href="https://lichess.org/training" target="_blank" rel="noopener">🧩<b>Puzzles</b><small>Lichess</small></a>
+   <button class="q" data-act="go" data-p="archive">📚<b>Archive</b><small>Your games</small></button>
+   <button class="q" data-act="go" data-p="board">♟<b>Board</b><small>Practice</small></button>
+   <div class="q off">🔬<b>The Lab</b><small>Planned · Phase 2</small></div>
+  </div>
+  <div class="card"><div class="sh"><h3>Recent games</h3></div><div id="recent"></div></div>
+  <div class="card"><h3>Milestones</h3><div class="chips" id="ach"></div></div>
+ </div>
+ </div>
+</section>
+
+<!-- THE BOARD -->
+<section class="page" id="board">
+ <h2 class="hi">The Board</h2>
+ <p class="mut">Practice board — you move both sides. Playing other people is The Arena (planned, Phase 4).</p>
+ <div class="bgrid">
+  <div>
+   <div id="bstate" class="mut"></div>
+   <div id="bd" class="bd" role="group" aria-label="Chessboard"></div>
+   <div class="status" id="bstatus" role="status"></div>
+   <div class="ctl"><button class="btn ghost" data-act="undo">↶ Undo</button><button class="btn ghost" data-act="flip">⇅ Flip</button><button class="btn ghost" data-act="restart">⟳ Restart</button></div>
+  </div>
+  <div class="card">
+   <h3>Moves</h3><div id="moves" class="moves"></div>
+   <h3>PGN</h3><textarea id="pgnOut" readonly aria-label="Current PGN"></textarea>
+   <div class="ctl"><button class="btn ghost sm" data-act="copyPgn">Copy</button><button class="btn ghost sm" data-act="dlPgn">Download</button></div>
+   <textarea id="pgnIn" placeholder="Paste a PGN here to load it" aria-label="PGN to import"></textarea>
+   <button class="btn sm" data-act="loadPgn">Load PGN</button>
+  </div>
+ </div>
+</section>
+
+<!-- THE GRIND ROOM -->
+<section class="page" id="grind">
+ <h2 class="hi">The Grind Room</h2>
+ <p class="mut">Small, focused sessions add up.</p>
+ <div class="hqgrid">
+ <div>
+  <div class="card"><h3>Today's mission</h3><div class="mission"></div></div>
+  <div class="card"><h3>Log a puzzle session</h3>
+   <p class="mut">Puzzles are solved on Lichess; log them here to build your streak.</p>
+   <a class="btn full" style="margin-bottom:12px" href="https://lichess.org/training" target="_blank" rel="noopener">Open Lichess puzzles ↗</a>
+   <form id="puzzleForm">
+    <label class="f">Focus theme<select name="w"><option>Hanging pieces</option><option>Forks</option><option>Pins</option><option>Skewers</option><option>Back-rank tactics</option><option>Discovered attacks</option><option>Checkmate patterns</option><option>Calculation</option><option>Endgames</option><option>Opening principles</option></select></label>
+    <label class="f">Puzzles completed<input name="n" type="number" inputmode="numeric" min="0" value="20" required></label>
+    <button class="btn full">Save session</button>
+   </form></div>
+ </div>
+ <div>
+  <div class="card"><h3>Training history</h3><div id="puzHist"></div></div>
+  <div class="card"><h3>Today's reflection</h3>
+   <form id="reflForm"><label class="f">One lesson from today<textarea name="t" placeholder="Today I noticed that..." required></textarea></label><button class="btn sm">Save reflection</button></form>
+   <div id="reflHist"></div></div>
+  <div class="card off"><h3>Planned</h3><p class="mut">Tactics Lab, opening and endgame practice, weakness-based puzzles (Phase 3). Coach Mode (Phase 3, needs a backend AI key).</p></div>
+ </div>
+ </div>
+</section>
+
+<!-- BATTLE ARCHIVE -->
+<section class="page" id="archive">
+ <h2 class="hi">Battle Archive</h2>
+ <p class="mut">Keep the lesson, not just the result.</p>
+ <div class="hqgrid">
+ <div>
+  <div class="stats three">
+   <div class="stat"><span>WINS</span><b id="aW">0</b></div><div class="stat"><span>DRAWS</span><b id="aD">0</b></div><div class="stat"><span>LOSSES</span><b id="aL">0</b></div>
+  </div>
+  <div class="card"><h3>Log a game</h3>
+   <form id="gameForm">
+    <label class="f">Opponent<input name="opp" placeholder="Opponent username"></label>
+    <label class="f">Result<select name="res"><option>Win</option><option>Draw</option><option>Loss</option></select></label>
+    <label class="f">Your rating after the game (optional)<input name="ra" type="number" inputmode="numeric" min="0" max="3500"></label>
+    <label class="chk"><input type="checkbox" name="sync" checked> Also update my current rating</label>
+    <label class="f">What did you learn?<textarea name="lesson" placeholder="A blunder, a good decision, a recurring weakness..."></textarea></label>
+    <button class="btn full">Save game</button>
+   </form></div>
+ </div>
+ <div>
+  <div class="card"><div class="sh"><h3>Games</h3><span class="chip" id="gLabel"></span></div><div id="games"></div></div>
+  <div class="card off"><h3>Planned · Phase 2</h3><p class="mut">Lichess game import, PGN library, replay, search, engine analysis.</p></div>
+ </div>
+ </div>
+</section>
+
+<!-- PROFILE -->
+<section class="page" id="profile">
+ <h2 class="hi">Profile &amp; settings</h2>
+ <div class="hqgrid">
+ <div>
+  <div class="card"><h3>Install App</h3><p class="mut" id="instNote"></p>
+   <button class="btn gold full" data-act="install" data-install>⬇ Install App</button></div>
+  <div class="card"><h3>Theme</h3><div class="seg">
+   <button data-act="set" data-k="theme" data-v="dark">🌲 Dark</button><button data-act="set" data-k="theme" data-v="light">🍦 Light</button></div></div>
+  <div class="card"><h3>Board &amp; pieces</h3>
+   <p class="mut">Board colours</p><div class="seg">
+   <button data-act="set" data-k="board" data-v="forest">Forest</button><button data-act="set" data-k="board" data-v="emerald">Emerald</button><button data-act="set" data-k="board" data-v="slate">Teal slate</button></div>
+   <p class="mut">Pieces</p><div class="seg">
+   <button data-act="set" data-k="pieces" data-v="classic">Ivory &amp; charcoal</button><button data-act="set" data-k="pieces" data-v="gold">Gold &amp; midnight</button></div></div>
+  <div class="card"><h3>Sound</h3>
+   <label class="chk"><input type="checkbox" id="sndOn"> Sound effects</label>
+   <label class="f">Volume<input type="range" id="vol" min="0" max="1" step="0.05"></label>
+   <div class="seg"><button data-act="set" data-k="pack" data-v="wood">Wooden</button><button data-act="set" data-k="pack" data-v="digital">Soft digital</button></div>
+   <button class="btn ghost sm" style="margin-top:10px" data-act="preview">▶ Preview</button>
+   <p class="mut">Wooden sounds are synthesised, not recordings.</p></div>
+ </div>
+ <div>
+  <div class="card"><h3>Linked accounts</h3>
+   <label class="f">Lichess username<input id="liIn" autocapitalize="off" spellcheck="false"></label>
+   <div class="ctl"><button class="btn ghost sm" data-act="openLi" data-w="p">Profile ↗</button><button class="btn ghost sm" data-act="openLi" data-w="g">Games ↗</button></div>
+   <label class="f">Chess.com username<input id="ccIn" autocapitalize="off" spellcheck="false"></label>
+   <button class="btn ghost sm" data-act="openCc">Profile ↗</button>
+   <p class="mut">Usernames are saved here. Real Lichess sync (not just links) is Phase 2.</p></div>
+  <div class="card"><h3>Backup &amp; data</h3>
+   <p class="mut">Everything is stored on this device. Export before clearing browser data or changing phones.</p>
+   <div class="ctl"><button class="btn sm" data-act="exportBackup">Export backup</button>
+   <label class="btn ghost sm" for="restoreFile">Restore backup</label><input id="restoreFile" type="file" accept="application/json,.json" hidden></div>
+   <button class="btn ghost sm" style="margin-top:12px;color:var(--bad)" data-act="resetAll">Erase all data…</button></div>
+ </div>
+ </div>
+</section>
 </main>
-<footer>MY CHESS JOURNEY · Built for steady progress, not pressure.</footer>
-<script>
-const $=id=>document.getElementById(id);
-const get=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
-const put=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
-let rating=get('mcj-rating',1204);
-function renderRating(){ $('rating').textContent=rating;$('remaining').textContent=Math.max(0,1500-rating);let p=Math.max(0,Math.min(100,(rating-1204)/(1500-1204)*100));$('progress').style.width=p+'%';$('progressText').textContent=Math.round(p)+'% of the climb completed';}
-renderRating();
-$('saveRating').onclick=()=>{let n=Number($('newRating').value);if(n>0){rating=n;put('mcj-rating',rating);renderRating();$('newRating').value='';}};
-const taskNames=['Solve 20 puzzles','Play / review rated rapid games (if scheduled)','Analyse every rated game','Write one lesson from today'];
-function renderTasks(){let done=get('mcj-tasks',[]);$('tasks').innerHTML='';taskNames.forEach((t,i)=>{let d=document.createElement('label');d.className='task';let c=document.createElement('input');c.type='checkbox';c.checked=done.includes(i);c.onchange=()=>{let a=get('mcj-tasks',[]);a=c.checked?[...a,i]:a.filter(x=>x!==i);put('mcj-tasks',a)};d.append(c,document.createTextNode(t));$('tasks').append(d)})}
-renderTasks();$('resetTasks').onclick=()=>{put('mcj-tasks',[]);renderTasks()};
-function renderGames(){let a=get('mcj-games',[]);$('games').innerHTML=a.length?'':'<p class="small">No games logged yet.</p>';a.slice().reverse().forEach(g=>{let d=document.createElement('div');d.className='game';d.innerHTML=`<strong>${escapeHtml(g.result)} vs ${escapeHtml(g.opponent||'Unknown')}</strong><span class="small">${g.rating?`Rating: ${g.rating} · `:''}${escapeHtml(g.notes||'No notes')}</span>`;$('games').append(d)})}
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-$('addGame').onclick=()=>{let a=get('mcj-games',[]);a.push({opponent:$('opponent').value,result:$('result').value,rating:$('gameRating').value,notes:$('notes').value,date:new Date().toISOString()});put('mcj-games',a);$('opponent').value='';$('gameRating').value='';$('notes').value='';renderGames()};renderGames();
-$('savePuzzle').onclick=()=>{$('puzzleStatus').textContent=`Saved ${Number($('puzzleCount').value)||0} puzzles · Focus: ${$('weakness').value}`;put('mcj-puzzle',{count:Number($('puzzleCount').value)||0,weakness:$('weakness').value,date:new Date().toISOString()})};
-$('openProfile').onclick=()=>window.open('https://lichess.org/@/'+encodeURIComponent($('lichessUser').value),'_blank');
-$('openGames').onclick=()=>window.open('https://lichess.org/api/games/user/'+encodeURIComponent($('lichessUser').value),'_blank');
-$('exportData').onclick=()=>{let data={rating,tasks:get('mcj-tasks',[]),games:get('mcj-games',[]),puzzle:get('mcj-puzzle',null)};let b=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='my-chess-journey-backup.json';a.click();URL.revokeObjectURL(a.href)};
-$('importFile').onchange=async e=>{try{let d=JSON.parse(await e.target.files[0].text());if(d.rating){rating=d.rating;put('mcj-rating',rating);renderRating()}if(d.tasks)put('mcj-tasks',d.tasks);if(d.games)put('mcj-games',d.games);renderTasks();renderGames();alert('Backup restored.')}catch{alert('That backup file could not be read.')}};
-let board=['♜','♞','♝','♛','♚','♝','♞','♜',...'♟♟♟♟♟♟♟♟',...'        ',...'        ',...'        ',...'        ','♙','♙','♙','♙','♙','♙','♙','♙','♖','♘','♗','♕','♔','♗','♘','♖'];let flipped=false,selected=-1;
-function drawBoard(){let b=$('board');b.innerHTML='';let arr=flipped?board.slice().reverse():board;arr.forEach((p,i)=>{let s=document.createElement('div');s.className='sq '+(((Math.floor(i/8)+i%8)%2)?'dark':'light')+(selected===i?' selected':'');s.textContent=p;s.onclick=()=>{selected=selected===i?-1:i;drawBoard()};b.append(s)})}
-drawBoard();$('flipBoard').onclick=()=>{flipped=!flipped;selected=-1;drawBoard()};$('resetBoard').onclick=()=>{selected=-1;drawBoard()};
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
-</script>
-</body></html>
+</div>
+
+<nav class="nav" aria-label="Main"><div class="ni">
+ <button data-act="go" data-p="hq" aria-current="page"><i>⌂</i>HQ</button>
+ <button data-act="go" data-p="board"><i>♞</i>Board</button>
+ <button data-act="go" data-p="grind"><i>🔥</i>Grind</button>
+ <button data-act="go" data-p="archive"><i>📚</i>Archive</button>
+ <button data-act="go" data-p="profile"><i>☻</i>Profile</button>
+</div></nav>
+
+<dialog id="dlg"></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>
